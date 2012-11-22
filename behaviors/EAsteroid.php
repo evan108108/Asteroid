@@ -34,7 +34,7 @@
 				$comets = array();
 				foreach($this->_comets as $id=>$config)
 					$comets[] = array('id'=>$id, 'renderType'=>$config->renderType, 'element'=>$config->element);
-		
+				Yii::app()->clientScript->registerCss('asteroidCSS', ".asteroidLoader{background-image:url('".$this->getAssetsUrl().'/images/loading.gif'. "'); background-position:center center; background-repeat:no-repeat; }" , CClientScript::POS_HEAD);
 				Yii::app()->clientScript->registerScript('script', 'var asteroidConfig = ' . CJSON::encode($comets), CClientScript::POS_HEAD);
 			}
 		}

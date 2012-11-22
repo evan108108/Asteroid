@@ -15,6 +15,7 @@ Asteroid.prototype.updateUI = function(myConfig)
 {	
 	var url =  this.createURL(myConfig.id);
 	var element = myConfig.element;
+	$(element).addClass('asteroidLoader');
 	$.get(url, function(data) {;
 			switch(myConfig.renderType)
 			{
@@ -27,7 +28,8 @@ Asteroid.prototype.updateUI = function(myConfig)
 				default:
 					$(element).html(data);
 			}
-		});
+			$(element).removeClass('asteroidLoader');
+	});
 }
 
 Asteroid.prototype.createURL = function(id) {
