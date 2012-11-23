@@ -6,6 +6,8 @@
 		public $_comets = array(); //List of all content sections to be rendered.
 		
 		public $_AsteroidCometRender = 'renderPartial'; //Tells Yii how content should be rendered.
+		public $_AsteroidCometRenderTemplate = 'ext.Asteroid.views.clean';
+
 		public $_assetsUrl = null; //Path to Asteroid Assets.
 
 		//Initilize Asteroid and create a comet for the $id passed
@@ -41,9 +43,11 @@
 		
 		//Setter for _AsteroidCometRender the sets the Yii render type for your comet
 		//renderPartial is the default. Generaly you need to use pass 'render' if you are using Yii widgets like Grid View.
+		//Optional: You may pass a view template path (only applies to a render method of `render`). By default this path is `ext.Asteroid.views.clean`
 		//Passing render will make sure that all scripts that are registered to POS_HEAD are included.
-		public function renderMethod($type='renderPartial')
+		public function renderMethod($type='renderPartial', $viewTemplate=null)
 		{
+			if(!is_null($viewTemplate)) $this->$_AsteroidCometRenderTemplate = $viewTemplate;
 			$this->_AsteroidCometRender = 'render';
 			return $this;
 		}
@@ -96,7 +100,7 @@
 			$data = $comet->data;
 			if($this->_AsteroidCometRender == 'render')
 			{
-				$this->owner->layout = 'ext.Asteroid.views.clean';
+				$this->owner->layout = $this->_AsteroidCometRenderTemplate;
 			}
 			
 			$this->owner->{$this->_AsteroidCometRender}($comet->template, $data());
