@@ -7,7 +7,10 @@ Asteroid.prototype.run = function() {
 	for(i=0;i<this.config.length;i++)
 	{
 		var myConfig = this.config[i];
-		this.updateUI(myConfig);
+		if(myConfig.listen.event == 'load' && myConfig.listen.selector == 'body')
+			this.updateUI(myConfig);
+		else
+			this.attachListener(myConfig);
 	}
 };
 
@@ -36,6 +39,15 @@ Asteroid.prototype.createURL = function(id) {
 	url = document.URL;
 	if(url.indexOf('?') > -1) return url + '&AsteroidActionID=' + id;
 	return url + '?' + 'AsteroidActionID=' + id;
+};
+
+Asteroid.prototype.attachListener = function(myConfig) {
+	//alert(myConfig.listen.selector);
+	var myConfig = myConfig;
+	var me = this;
+	$('body').delegate(myConfig.listen.selector, myConfig.listen.event, function() {
+		me.updateUI(myConfig);
+	});
 };
 
 $(document).ready(function() {

@@ -10,6 +10,8 @@
 
 		public $_assetsUrl = null; //Path to Asteroid Assets.
 
+		public $_listener; //Stores listener for comet;
+
 		//Initilize Asteroid and creates a comet for the $id passed
 		//$id should be unique unless you intend to overwrite an existing comet.
 		//Note: A `comet` is an object that contains a unique async event.
@@ -19,6 +21,7 @@
 				$this->_AsteroidActionID = $_GET['AsteroidActionID'];
 
 			$this->_AsteroidID = $id;
+			$this->_listener = array('event'=>'load', 'selector'=>'body'); //re sets the default listener to body.onLoad
 			$this->_comets[$id] = array();
 
 			return $this;
@@ -32,7 +35,7 @@
 			{
 				$comets = array();
 				foreach($this->_comets as $id=>$config)
-					$comets[] = array('id'=>$id, 'renderType'=>$config->renderType, 'element'=>$config->element);
+					$comets[] = array('id'=>$id, 'renderType'=>$config->renderType, 'element'=>$config->element, 'listen'=>$config->listen);
 				
 				$cs = Yii::app()->clientScript;
 				$cs->registerCoreScript('jquery');
@@ -50,6 +53,14 @@
 		{
 			if(!is_null($viewTemplate)) $this->$_AsteroidCometRenderTemplate = $viewTemplate;
 			$this->_AsteroidCometRender = 'render';
+			return $this;
+		}
+		
+		//Set a custom event listener
+		//Example: onEvent('click', 'h1');
+		public function onEvent($event, $selector)
+		{
+			$this->_listener = array('event'=>$event, 'selector'=>$selector);
 			return $this;
 		}
 
@@ -88,6 +99,7 @@
 		//When `_AsteroidActionID` is set execComet will be called.
 		public function setComet($id, $config = array())
 		{
+			$config['listen'] = $this->_listener;
 			$this->_comets[$id] = (object) $config;
 			if($this->_AsteroidActionID && $this->_AsteroidActionID == $id)
 				$this->execComet($id);
