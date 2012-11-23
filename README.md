@@ -34,15 +34,15 @@ class MyController extends Controller
 
 ## Example Usage
 ```php
-/**
- * The following Asteroids will be rendered Async after your page has loaded.
- */
 class AsteroidController extends Controller
 	{
 		public function behaviors() {
 			return array('EAsteroid' => array('class'=>'ext.Asteroid.behaviors.EAsteroid'));
 		}
-
+		
+		/**
+		 * The following Asteroids will be rendered Async after your page has loaded.
+		 */
 		public function actionTestUI()
 		{
 			$this->Asteroid('part1')->renderMethod('render')->append('#myPlace', '_myPlace1',   function() { return array('model' =>new Work() ); } )
