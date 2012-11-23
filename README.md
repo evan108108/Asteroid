@@ -22,4 +22,18 @@ class AsteroidController extends Controller
 			$this->render('test');
 		}	
 		
-	}```
+	}
+```
+
+```php
+/** 
+ * When I click DOM element with #SomeDomElementID 
+ * then replace then content of #myPlace1 with the partial _mPlace1 and 
+ * apply the prams returned from the closure.
+ */
+$this->Asteroid('part1')->onEvent('click', '#SomeDomElementID')	
+	->replace('#myPlace1', '_myPlace1', function() { 
+		return array('dude2'=>'yeah2!'); 
+	})->orbit();
+```
+					
