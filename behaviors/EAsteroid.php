@@ -85,6 +85,7 @@
 
 		//This method is called internally by EAsteroid.
 		//Sets the _comets var so that it contains a list of all comets.
+		//When `_AsteroidActionID` is set execComet will be called.
 		public function setComet($id, $config = array())
 		{
 			$this->_comets[$id] = (object) $config;
@@ -94,7 +95,9 @@
 		}
 		
 		//Internal comet render method.
-		//Renders comet with $id and exits Yii
+		//Takes the unique comet $id.
+		//Renders comet with $id.
+		//Interrupts action and exits after render of the comet.
 		public function execComet($id)
 		{
 			$comet = $this->_comets[$id];
