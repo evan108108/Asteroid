@@ -10,8 +10,9 @@
 
 		public $_assetsUrl = null; //Path to Asteroid Assets.
 
-		//Initilize Asteroid and create a comet for the $id passed
+		//Initilize Asteroid and creates a comet for the $id passed
 		//$id should be unique unless you intend to overwrite an existing comet.
+		//Note: A `comet` is an object that contains a unique async event.
 		public function Asteroid($id)
 		{
 			if(!isset($this->_AsteroidActionID) && isset($_GET['AsteroidActionID']))
@@ -23,7 +24,7 @@
 			return $this;
 		}
 		
-		//This method will render all JS and CSS dependencies
+		//This method will render all JS and CSS dependencies.
 		//You must Call `orbit()` as the very last step after all commets have been initialized with Asteroid('id');
 		public function orbit()
 		{
@@ -43,7 +44,7 @@
 		
 		//Setter for _AsteroidCometRender the sets the Yii render type for your comet
 		//renderPartial is the default. Generaly you need to use pass 'render' if you are using Yii widgets like Grid View.
-		//Optional: You may pass a view template path (only applies to a render method of `render`). By default this path is `ext.Asteroid.views.clean`
+		//Optional: You may pass a view template path (only applies to a render method type of `render`). By default this path is `ext.Asteroid.views.clean`
 		//Passing render will make sure that all scripts that are registered to POS_HEAD are included.
 		public function renderMethod($type='renderPartial', $viewTemplate=null)
 		{
