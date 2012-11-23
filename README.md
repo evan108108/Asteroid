@@ -27,7 +27,7 @@ class AsteroidController extends Controller
 
 ```php
 /** 
- * When I click DOM element with #SomeDomElementID 
+ * When I click DOM element with the ID #SomeDomElementID 
  * then replace then content of #myPlace1 with the partial _mPlace1 and 
  * apply the prams returned from the closure.
  */
