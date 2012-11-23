@@ -4,7 +4,21 @@ Asteroid
 Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions!
 
 
-**Example Usage**
+## Installation
+1. Place the Asteroid directory in protected/extensions
+2. In desired Controller add the Asteroid behavior like so:
+
+```php
+class MyController extends Controller
+{
+	public function behaviors() {
+		return array('EAsteroid' => array('class'=>'ext.Asteroid.behaviors.EAsteroid'));
+	}
+…
+}
+```
+
+## Example Usage
 ```php
 class AsteroidController extends Controller
 	{
