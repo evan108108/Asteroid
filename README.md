@@ -31,6 +31,7 @@ class MyController extends Controller
 | prepend  | Same as `append` but prepends to DOM element content.  |
 | replace  | Same as `append` but replaces DOM element content.  |
 | orbit  | Renders all JS and CSS dependencies. You must Call `orbit()` as the very last step after all comets have been initialized with Asteroid('id');  |
+| execJS  | Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. `execJS('alert("Yeah!");')` returns $this.  |
 
 ## Example Usage
 ```php

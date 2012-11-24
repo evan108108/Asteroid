@@ -4,6 +4,7 @@
 		public $_AsteroidID; //The unique idenifier of a section of dynamically rendered content
 		public $_AsteroidActionID; //Set When $_GET['AsteroidActionID'] is sent. Tells EAsteroid which commet to render. 
 		public $_comets = array(); //List of all content sections to be rendered.
+		public $_js = ""; //Stores arbitrary javascript to be executed.
 		
 		public $_AsteroidCometRender = 'renderPartial'; //Tells Yii how content should be rendered.
 		public $_AsteroidCometRenderTemplate = 'ext.Asteroid.views.clean';
@@ -12,7 +13,7 @@
 
 		public $_listener; //Stores listener for comet;
 
-		//Initilize Asteroid and creates a comet for the $id passed
+		//Initilizes Asteroid and creates a comet for the $id passed
 		//$id should be unique unless you intend to overwrite an existing comet.
 		//Note: A `comet` is an object that contains a unique async event.
 		public function Asteroid($id)
@@ -35,12 +36,15 @@
 			{
 				$comets = array();
 				foreach($this->_comets as $id=>$config)
-					$comets[] = array('id'=>$id, 'renderType'=>$config->renderType, 'element'=>$config->element, 'listen'=>$config->listen);
-				
+				{
+					if(isset($config->renderType)) //We do this check to in case your comet simply executes arbitrary js onEvent...
+						$comets[] = array('id'=>$id, 'renderType'=>$config->renderType, 'element'=>$config->element, 'listen'=>$config->listen);
+				}
 				$cs = Yii::app()->clientScript;
 				$cs->registerCoreScript('jquery');
 				$cs->registerCss('asteroidCSS', ".asteroidLoader{background-image:url('".$this->getAssetsUrl().'/images/loading.gif'. "'); background-position:center center; background-repeat:no-repeat; }" , CClientScript::POS_HEAD);
 				$cs->registerScript('script', 'var asteroidConfig = ' . CJSON::encode($comets), CClientScript::POS_HEAD);
+				if(!empty($this->_js)) $cs->registerScript('script', $this->_js);
 				$cs->registerScriptFile($this->getAssetsUrl().'/js/Asteroid.js');
 			}
 		}
@@ -104,6 +108,19 @@
 			if($this->_AsteroidActionID && $this->_AsteroidActionID == $id)
 				$this->execComet($id);
 			return true;
+		}
+
+		//Call this method to add arbitrary JavaScript
+		//Takes a string $js of valid JavaScript
+		public function execJS($js)
+		{
+			if($this->_listener == array('event'=>'load', 'selector'=>'body'))
+				$js = $this->owner->renderPartial('ext.Asteroid.views._JS_onLoad', array('js'=>$js), true);
+			else
+				$js = $this->owner->renderPartial('ext.Asteroid.views._JS_onEvent', array('listener'=>$this->_listener, 'js'=>$js), true);
+			
+			$this->_js .= "\n" . $js;
+			return $this;
 		}
 		
 		//Internal comet render method.
