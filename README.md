@@ -129,38 +129,161 @@ class MyController extends Controller
 
 
 ## Example Usage
-```php
-class AsteroidController extends Controller
-	{
-		public function behaviors() {
-			return array('EAsteroid' => array('class'=>'ext.Asteroid.behaviors.EAsteroid'));
-		}
-		
-		/**
-		 * The following Asteroids will be rendered Async after your page has loaded.
-		 */
-		public function actionTestUI()
-		{
-			$this->Asteroid('part1')->renderMethod('render')->append('#myPlace', '_myPlace1',   function() { return array('model' =>new Work() ); } )
-			->Asteroid('part2')->prepend('#myPlace2', '_myPlace2', function() { return array('dude2'=>'yeah2!'); } )
-			->Asteroid('part3')->replace('#myPlace3', '_myPlace3', function() { return array('dude3'=>'yeah3!'); } )
-			->orbit();
+For purposes of the following examples we will assume we have the below controller and views:
 
-			$this->render('test');
-		}	
-		
+####<a name="sampleController"/>SampleController.php</a>
+```php
+class sampleController extends Controller
+{
+	public function behaviors() {
+		return array('EAsteroid' => array('class'=>'ext.Asteroid.behaviors.EAsteroid'));
 	}
+	…
+		
+	public function actionTestUI()
+	{
+		…
+		$this->render('test');
+	}
+		
+		…
+}
 ```
 
+####<a name="indexView"/>index.php</a>
+```html
+	<div id="clickMe">Click Here</div>
+	
+	<div id="myDiv1">
+	
+	</div>
+	
+	<div id="myDiv2">
+	
+	</div>
+	
+	<div id="myDiv3">
+	
+	</div>
+```
+
+####<a name="_p1"/>_p1.php</a>
+```html
+	<h1><?php echo $var1; ?></h1>
+	<h2><?php echo $var2; ?></h1>
+```
+
+####<a name="_p2"/>_p2.php</a>
+```html
+	<h1><?php echo $var3; ?></h1>
+	<h2><?php echo $var4; ?></h1>
+```
+
+####<a name="_p3GridView"/>_p3GridView.php</a>
+```html
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'airport-grid',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'columns'=>array(
+		'id',
+    	'sample_code',
+    	'name',
+		array(
+			'class'=>'CButtonColumn',
+		),
+	),
+)); ?>
+```
+
+
+###<a name="_example1"/>Example 1:</a> Using replace() append() And prepend()
+Lets say we want to dynamically load the content of the partial view _p1.php into the div "#myDiv1" of test view.
 ```php
-/** 
- * When I click DOM element with the ID #SomeDomElementID 
- * then replace then content of #myPlace1 with the partial _mPlace1 and 
- * apply the prams returned from the closure.
- */
-$this->Asteroid('part1')->onEvent('click', '#SomeDomElementID')	
-	->replace('#myPlace1', '_myPlace1', function() { 
-		return array('dude2'=>'yeah2!'); 
-	})->orbit();
+public function actionTestUI()
+{
+	$this->asteroid('a1')
+			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
+	->orbit();
+	
+	$this->render('test');
+}
+```
+
+
+Now lets say we have the same scenario but we would also like to append some content to the div "#myDiv2"
+```php
+public function actionTestUI()
+{
+	$this->asteroid('a1')
+			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
+		 ->asteroid('a2')
+		 	->append('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
+	->orbit();
+	
+	$this->render('test');
+}
+```
+
+We could also have chosen to prepend 
+```php
+public function actionTestUI()
+{
+	$this->asteroid('a1')
+			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
+		 ->asteroid('a2')
+		 	->prepend('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
+	->orbit();
+	
+	$this->render('test');
+}
+```
+
+
+###<a name="_example2"/>Example 2:</a> Dynamically Rendering An Yii Grid View
+When your partial contains a widget like CGridView that registers scripts and or style sheets to POS_HEAD you should use this approach.
+```php
+public function actionTestUI()
+{
+	$this->asteroid('a1')
+			->renderMethod('render')
+			->replace('#myDiv3', '_p3GridView',  function() { 
+				$sample = new Sample(); 
+				if(isset($_GET['Sample'])) $sample>attributes = $_GET['Sample']; 
+				return array('model' => $sample); 
+			  })
+	->orbit();
+	
+	$this->render('test');
+}
+```
+
+
+###<a name="_example2"/>Exmaple 3:</a> Using onEvent()
+Lets say we want to replace the content of div "#myDiv1" with the partial _p1.php when I click the div "#clickMe" 
+
+```php
+public function actionTestUI()
+{
+
+	$this->Asteroid('a3')->onEvent('click', '#clickMe')	
+			->replace('#myDiv1', '_p1', function() { return array('var1'=>'Yeah!', 'var2'=>'You clicked me…'); })
+	->orbit();
+
+	$this->render('test');
+}
+```
+
+Now lets say we want to execute some additional JavaScript on our click event.
+```php
+public function actionTestUI()
+{
+	$this->Asteroid('a3')->onEvent('click', '#clickMe')	
+			->execJs("alert('I know you would click');")
+			->replace('#myDiv1', '_p1', function() { return array('var1'=>'Yeah!', 'var2'=>'You clicked me…'); })
+	->orbit();
+
+	$this->render('test');
+}
 ```
 					
