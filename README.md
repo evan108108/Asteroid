@@ -1,7 +1,7 @@
 Asteroid
 ========
 
-Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions!
+Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions! Quickly bind JQuery events and much more…
 
 ## Requirements
 1. Yii 1.8 or above
