@@ -38,7 +38,7 @@ class MyController extends Controller
 
 #####<a name="methodAsteroid"/> Asteroid</a>
 
-| ```public object Asteroid(string $id)```   |
+| public object Asteroid(string $id)   |
 |---------------|
 |Initilizes Asteroid for the $id passed. $id should be unique unless you intend to overwrite an existing Asteroid. **All Asteroids must start with this method**|
 
@@ -49,7 +49,7 @@ class MyController extends Controller
 
 
 #####<a name="methodOnEvent"/> onEvent</a>
-| ```public object onEvent(string $event, string $selector)```   |
+| public object onEvent(string $event, string $selector)   |
 |---------------|
 |Sets a custom event listener. The default is 'load', 'body' and you only need to call this method if you intend to do somthing other then the default.|
 
@@ -60,7 +60,7 @@ class MyController extends Controller
 | $selector | String  | Tells Asteroid which DOM object(s) to attach the listener to. |
 
 ####<a name="methodRenderMethod"/> renderMethod</a>
-| ```public object renderMethod(string $type='renderPartial', string $viewTemplate=null)```   |
+| public object renderMethod(string $type='renderPartial', string $viewTemplate=null)   |
 |---------------|
 | Sets the Yii render type for your Asteroid. `renderPartial` is the default. Only call this method if you need an Yii render type of 'render'. |
 
@@ -71,7 +71,7 @@ class MyController extends Controller
 
 
 ####<a name="methodAppend"/> append</a>
-| ```public object append(string $selector, string $view, closure $data)```|
+| public object append(string $selector, string $view, closure $data)|
 |---------------|
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and append it to the Dom Element(s) specified by $selector.|
 
@@ -83,7 +83,7 @@ class MyController extends Controller
 
 
 ####<a name="methodPrepend"/> prepend</a>
-| ```public object prepend(string $selector, string $view, closure $data)```|
+| public object prepend(string $selector, string $view, closure $data)|
 |---------------|
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and prepend it to the Dom Element(s) specified by $selector.|
 
@@ -94,7 +94,7 @@ class MyController extends Controller
 | $data | Closure | Closure must return an associative array. This array is passed to the $view like so: ($this->renderPartial($view, $data())|
 
 ####<a name="methodReplace"/> replace</a>
-| ```public object replace(string $selector, string $view, closure $data)```|
+| public object replace(string $selector, string $view, closure $data)|
 |---------------|
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and replace the content of the Dom Element(s) specified by $selector.|
 
@@ -106,7 +106,7 @@ class MyController extends Controller
 
 
 ####<a name="methodExecJS"/> execJS</a>
-| ```public object execJS(string $js)```|
+| public object execJS(string $js)|
 |---------------|
 | Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. execJS('alert("Yeah!");'). You should only calls this method if you need to execute addtional JS not provided by Asteroid |
 
@@ -115,7 +115,7 @@ class MyController extends Controller
 | $js  | String  | Valid Javascript |
 
 ####<a name="methodOrbit"/> orbit</a>
-| ```public orbit()```|
+| public orbit() |
 |---------------|
 | Renders all JS and CSS dependencies. You must Call orbit() as the very last step after all comets have been initialized with Asteroid('id'); |
 
