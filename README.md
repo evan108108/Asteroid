@@ -40,7 +40,7 @@ class MyController extends Controller
 
 |Method Info|
 |---------------|
-| ```public object Asteroid(string $id)```   |
+| ```php public object Asteroid(string $id)```   |
 |Initilizes Asteroid for the $id passed. $id should be unique unless you intend to overwrite an existing Asteroid. **All Asteroids must start with this method**|
 
 
