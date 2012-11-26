@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Asteroid by evan108108</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Asteroid</h1>
+        <p>Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions!</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/evan108108/Asteroid" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/evan108108/Asteroid/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/evan108108/Asteroid/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Asteroid</h1>
+
+<p>Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions! Quickly bind JQuery events and much more…</p>
+
+<h2>Requirements</h2>
+
+<ol>
+<li>Yii 1.8 or above</li>
+<li>PHP 5.3 or above</li>
+</ol><h2>Installation</h2>
+
+<ol>
+<li>Place the Asteroid directory in protected/extensions</li>
+<li>In your desired Controller Class add the Asteroid behavior like so:</li>
+</ol><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'EAsteroid'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'class'</span><span class="o">=&gt;</span><span class="s1">'ext.Asteroid.behaviors.EAsteroid'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="err">…</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>Examples</h2>
+
+<p>For purposes of the following examples we will assume we have the below controller and views:</p>
+
+<h4>
+<a name="sampleController"></a>SampleController.php</h4>
+
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">sampleController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'EAsteroid'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'class'</span><span class="o">=&gt;</span><span class="s1">'ext.Asteroid.behaviors.EAsteroid'</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="err">…</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="err">…</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+        <span class="err">…</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="indexView"></a>index.php</h4>
+
+<div class="highlight"><pre>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"clickMe"</span><span class="nt">&gt;</span>Click Here<span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv1"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv2"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv3"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<h4>
+<a name="_p1"></a>_p1.php</h4>
+
+<div class="highlight"><pre>    <span class="nt">&lt;h1&gt;</span><span class="cp">&lt;?php echo $var1; ?&gt;</span><span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;?php echo $var2; ?&gt;</span><span class="nt">&lt;/h1&gt;</span>
+</pre></div>
+
+<h4>
+<a name="_p2"></a>_p2.php</h4>
+
+<div class="highlight"><pre>    <span class="nt">&lt;h1&gt;</span><span class="cp">&lt;?php echo $var3; ?&gt;</span><span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;?php echo $var4; ?&gt;</span><span class="nt">&lt;/h1&gt;</span>
+</pre></div>
+
+<h4>
+<a name="_p3GridView"></a>_p3GridView.php</h4>
+
+<div class="highlight"><pre><span class="cp">&lt;?php $this-&gt;widget('zii.widgets.grid.CGridView', array(</span>
+<span class="cp">    'id'=&gt;'airport-grid',</span>
+<span class="cp">    'dataProvider'=&gt;$model-&gt;search(),</span>
+<span class="cp">    'filter'=&gt;$model,</span>
+<span class="cp">    'columns'=&gt;array(</span>
+<span class="cp">        'id',</span>
+<span class="cp">        'sample_code',</span>
+<span class="cp">        'name',</span>
+<span class="cp">        array(</span>
+<span class="cp">            'class'=&gt;'CButtonColumn',</span>
+<span class="cp">        ),</span>
+<span class="cp">    ),</span>
+<span class="cp">)); ?&gt;</span>
+</pre></div>
+
+<h3>
+<a name="_example1"></a>Example 1: Using replace() append() And prepend()</h3>
+
+<p>Lets say we want to dynamically load the content of the partial view _p1.php into the div "#myDiv1" of test view.</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Now lets say we have the same scenario but we would also like to append some content to the div "#myDiv2"</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
+         <span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'#myDive2'</span><span class="p">,</span> <span class="s1">'_p2'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var3'</span><span class="o">=&gt;</span><span class="s1">'Im Here!'</span><span class="p">,</span> <span class="s1">'var4'</span><span class="o">=&gt;</span><span class="s1">'You know it!'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>We could also have chosen to prepend </p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
+         <span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="s1">'#myDive2'</span><span class="p">,</span> <span class="s1">'_p2'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var3'</span><span class="o">=&gt;</span><span class="s1">'Im Here!'</span><span class="p">,</span> <span class="s1">'var4'</span><span class="o">=&gt;</span><span class="s1">'You know it!'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="_example2"></a>Example 2: Dynamically Rendering An Yii Grid View</h3>
+
+<p>When your partial contains a widget like CGridView that registers scripts and or style sheets to POS_HEAD you should use this approach.</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">renderMethod</span><span class="p">(</span><span class="s1">'render'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv3'</span><span class="p">,</span> <span class="s1">'_p3GridView'</span><span class="p">,</span>  <span class="k">function</span><span class="p">()</span> <span class="p">{</span> 
+                <span class="nv">$sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sample</span><span class="p">();</span> 
+                <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">]))</span> <span class="nv">$sample</span><span class="o">&gt;</span><span class="nx">attributes</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">];</span> 
+                <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="nv">$sample</span><span class="p">);</span> 
+              <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="_example2"></a>Exmaple 3: Using onEvent()</h3>
+
+<p>Lets say we want to replace the content of div "#myDiv1" with the partial _p1.php when I click the div "#clickMe" </p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a3'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">onEvent</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'#clickMe'</span><span class="p">)</span> 
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'You clicked me…'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Now lets say we want to execute some additional JavaScript on our click event.</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a3'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">onEvent</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'#clickMe'</span><span class="p">)</span> 
+            <span class="o">-&gt;</span><span class="na">execJs</span><span class="p">(</span><span class="s2">"alert('I know you would click');"</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'You clicked me…'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Public Methods</h3>
+
+<table>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><a href="#methodAsteroid">Asteroid</a></td>
+<td>Initilizes Asteroid for the $id passed. $id should be unique unless you intend to overwrite an existing Asteroid. Example: <code>Asteroid('block1')</code>.</td>
+</tr>
+<tr>
+<td><a href="#methodOnEvent">onEvent</a></td>
+<td>Sets a custom event listener. Example: <code>onEvent('click', '#someDomID')</code>; The default is 'load', 'body'.</td>
+</tr>
+<tr>
+<td><a href="#methodRenderMethod">renderMethod</a></td>
+<td>Sets the Yii render type for your Asteroid. <code>renderPartial</code> is the default. Generally you only need to use pass 'render' if you are using Yii widgets like Grid View.</td>
+</tr>
+<tr>
+<td><a href="#methodAppend">append</a></td>
+<td>Tells JS to dynamically load the specified view and append it to the specified DOM element.</td>
+</tr>
+<tr>
+<td><a href="#methodPrepend">prepend</a></td>
+<td>Same as <code>append</code> but prepends to DOM element content.</td>
+</tr>
+<tr>
+<td><a href="#methodReplace">replace</a></td>
+<td>Same as <code>append</code> but replaces DOM element content.</td>
+</tr>
+<tr>
+<td><a href="#methodExecJS">execJS</a></td>
+<td>Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. <code>execJS('alert("Yeah!");')</code>
+</td>
+</tr>
+<tr>
+<td><a href="#methodOrbit">orbit</a></td>
+<td>Renders all JS and CSS dependencies. You must Call <code>orbit()</code> as the very last step after all comets have been initialized with Asteroid('id');</td>
+</tr>
+</table><h3>Method Details</h3>
+
+<h5>
+<a name="methodAsteroid"></a> Asteroid</h5>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object Asteroid(string $id)</code></td>
+</tr>
+<tr>
+<td>Initilizes Asteroid for the $id passed. $id should be unique unless you intend to overwrite an existing Asteroid. <strong>All Asteroids must start with this method</strong>
+</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$id</td>
+<td>String</td>
+<td>Unique Identifier for this Asteroid event</td>
+</tr>
+</table><h5>
+<a name="methodOnEvent"></a> onEvent</h5>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object onEvent(string $event, string $selector)</code></td>
+</tr>
+<tr>
+<td>Sets a custom event listener. The default is 'load', 'body' and you only need to call this method if you intend to do somthing other then the default.</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$event</td>
+<td>String</td>
+<td>Tells Asteroid which JQuery event to listen for. List of possible $event values:<br> "click", "blur", "focus", "focusin", "focusout", "load", "resize", "scroll", "unload", "dblclick", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave", "change", "select", "submit", "keydown", "keypress", "keyup", "error"</td>
+</tr>
+<tr>
+<td>$selector</td>
+<td>String</td>
+<td>Tells Asteroid which DOM object(s) to attach the listener to.</td>
+</tr>
+</table><h4>
+<a name="methodRenderMethod"></a> renderMethod</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object renderMethod(string $type='renderPartial', string $viewTemplate=null)</code></td>
+</tr>
+<tr>
+<td>Sets the Yii render type for your Asteroid. <code>renderPartial</code> is the default. Only call this method if you need an Yii render type of 'render'.</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$type</td>
+<td>String</td>
+<td>Tells Asteroid which Yii render type to use. Default is 'renderPartial'. Should be set to 'render' when using widgets that register scripts or style sheets to POS_HEAD.</td>
+</tr>
+<tr>
+<td>$viewTemplate</td>
+<td>String</td>
+<td>Tells Asteroid which view template to use for render. Optional and should only be used when $renderType is set to 'render'. The template used for type render is ext.Asteroid.views.clean</td>
+</tr>
+</table><h4>
+<a name="methodAppend"></a> append</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object append(string $selector, string $view, closure $data)</code></td>
+</tr>
+<tr>
+<td>Tells your Asteroid to dynamically load the Yii view $view ($this-&gt;renderPartial($view, $data()) and append it to the Dom Element(s) specified by $selector.</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$selector</td>
+<td>String</td>
+<td>JQuery Dom selector ie '#someDomID'</td>
+</tr>
+<tr>
+<td>$view</td>
+<td>String</td>
+<td>Yii view file ie "_someView"</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>Closure</td>
+<td>Closure must return an associative array. This array is passed to the $view like so: ($this-&gt;renderPartial($view, $data())</td>
+</tr>
+</table><h4>
+<a name="methodPrepend"></a> prepend</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object prepend(string $selector, string $view, closure $data)</code></td>
+</tr>
+<tr>
+<td>Tells your Asteroid to dynamically load the Yii view $view ($this-&gt;renderPartial($view, $data()) and prepend it to the Dom Element(s) specified by $selector.</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$selector</td>
+<td>String</td>
+<td>JQuery Dom selector ie '#someDomID'</td>
+</tr>
+<tr>
+<td>$view</td>
+<td>String</td>
+<td>Yii view file ie "_someView"</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>Closure</td>
+<td>Closure must return an associative array. This array is passed to the $view like so: ($this-&gt;renderPartial($view, $data())</td>
+</tr>
+</table><h4>
+<a name="methodReplace"></a> replace</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object replace(string $selector, string $view, closure $data)</code></td>
+</tr>
+<tr>
+<td>Tells your Asteroid to dynamically load the Yii view $view ($this-&gt;renderPartial($view, $data()) and replace the content of the Dom Element(s) specified by $selector.</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$selector</td>
+<td>String</td>
+<td>JQuery Dom selector ie '#someDomID'</td>
+</tr>
+<tr>
+<td>$view</td>
+<td>String</td>
+<td>Yii view file ie "_someView"</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>Closure</td>
+<td>Closure must return an associative array. This array is passed to the $view like so: ($this-&gt;renderPartial($view, $data())</td>
+</tr>
+</table><h4>
+<a name="methodExecJS"></a> execJS</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object execJS(string $js)</code></td>
+</tr>
+<tr>
+<td>Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. execJS('alert("Yeah!");'). You should only calls this method if you need to execute addtional JS not provided by Asteroid</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$js</td>
+<td>String</td>
+<td>Valid Javascript</td>
+</tr>
+</table><h4>
+<a name="methodOrbit"></a> orbit</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public orbit()</code></td>
+</tr>
+<tr>
+<td>Renders all JS and CSS dependencies. You must Call orbit() as the very last step after all comets have been initialized with Asteroid('id');</td>
+</tr>
+</table>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/evan108108">evan108108</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
