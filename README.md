@@ -203,7 +203,7 @@ public function actionTestUI()
 |Initilizes Asteroid for the $id passed. $id should be unique unless you intend to overwrite an existing Asteroid. **All Asteroids must start with this method**|
 
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $id  | String  | Unique Identifier for this Asteroid event |
 
@@ -215,7 +215,7 @@ public function actionTestUI()
 |Sets a custom event listener. The default is 'load', 'body' and you only need to call this method if you intend to do somthing other then the default.|
 
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $event  | String  | Tells Asteroid which JQuery event to listen for. List of possible $event values:<br/> "click", "blur", "focus", "focusin", "focusout", "load", "resize", "scroll", "unload", "dblclick", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave", "change", "select", "submit", "keydown", "keypress", "keyup", "error" |
 | $selector | String  | Tells Asteroid which DOM object(s) to attach the listener to. |
@@ -226,7 +226,7 @@ public function actionTestUI()
 | ```public object renderMethod(string $type='renderPartial', string $viewTemplate=null)```   |
 | Sets the Yii render type for your Asteroid. `renderPartial` is the default. Only call this method if you need an Yii render type of 'render'. |
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $type  | String  | Tells Asteroid which Yii render type to use. Default is 'renderPartial'. Should be set to 'render' when using widgets that register scripts or style sheets to POS_HEAD. |
 | $viewTemplate  | String  | Tells Asteroid which view template to use for render. Optional and should only be used when $renderType is set to 'render'. The template used for type render is ext.Asteroid.views.clean |
@@ -238,7 +238,7 @@ public function actionTestUI()
 | ```public object append(string $selector, string $view, closure $data)``` |
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and append it to the Dom Element(s) specified by $selector.|
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $selector  | String  | JQuery Dom selector ie '#someDomID' |
 | $view | String | Yii view file ie "_someView" |
@@ -251,7 +251,7 @@ public function actionTestUI()
 | ```public object prepend(string $selector, string $view, closure $data)``` |
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and prepend it to the Dom Element(s) specified by $selector.|
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $selector  | String  | JQuery Dom selector ie '#someDomID' |
 | $view | String | Yii view file ie "_someView" |
@@ -263,7 +263,7 @@ public function actionTestUI()
 | ```public object replace(string $selector, string $view, closure $data)``` |
 |Tells your Asteroid to dynamically load the Yii view $view ($this->renderPartial($view, $data()) and replace the content of the Dom Element(s) specified by $selector.|
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $selector  | String  | JQuery Dom selector ie '#someDomID' |
 | $view | String | Yii view file ie "_someView" |
@@ -276,7 +276,7 @@ public function actionTestUI()
 | ```public object execJS(string $js)``` |
 | Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. execJS('alert("Yeah!");'). You should only calls this method if you need to execute addtional JS not provided by Asteroid |
 
-|  Param |  Param Type | Desc |
+|  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $js  | String  | Valid Javascript |
 
