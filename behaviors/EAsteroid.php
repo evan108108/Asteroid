@@ -68,33 +68,33 @@
 			return $this;
 		}
 
-		//Tells JS to append the content to the dom element :$element 
-		//using the Yii template view: $template
+		//Tells JS to append the content to the dom element :$selector 
+		//using the Yii view: $view
 		//with the data: $data. $data must be a closure that returns an associative array.
-		//String $elment, String $template, Closure $data
-		public function append($element, $template, closure $data)
+		//String $elment, String $view, Closure $data
+		public function append($selector, $view, closure $data)
 		{
-			$this->setComet($this->_AsteroidID, array('renderType'=>'append', 'element'=>$element, 'template'=>$template, 'data'=>$data));
+			$this->setComet($this->_AsteroidID, array('renderType'=>'append', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
 		}
 
-		//Tells JS to prepend the content to the dom element :$element 
-		//using the Yii template view: $template
+		//Tells JS to prepend the content to the dom element :$selector 
+		//using the Yii view: $view
 		//with the data: $data. $data must be a closure the returns an array.
-		//String $elment, String $template, Closure $data
-		public function prepend($element, $template, closure $data)
+		//String $elment, String $view, Closure $data
+		public function prepend($selector, $view, closure $data)
 		{
-			$this->setComet($this->_AsteroidID, array('renderType'=>'prepend', 'element'=>$element, 'template'=>$template, 'data'=>$data));
+			$this->setComet($this->_AsteroidID, array('renderType'=>'prepend', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
 		}
 		
-		//Tells JS to replace the content to the dom element :$element 
-		//using the Yii template view: $template
+		//Tells JS to replace the content to the dom element :$selector 
+		//using the Yii view: $view
 		//with the data: $data. $data must be a closure the returns an array.
-		//String $elment, String $template, Closure $data
-		public function replace($element, $template, closure $data)
+		//String $elment, String $view, Closure $data
+		public function replace($selector, $view, closure $data)
 		{
-			$this->setComet($this->_AsteroidID, array('renderType'=>'replace', 'element'=>$element, 'template'=>$template, 'data'=>$data));
+			$this->setComet($this->_AsteroidID, array('renderType'=>'replace', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
 		}
 
