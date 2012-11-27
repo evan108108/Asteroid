@@ -2,6 +2,7 @@ Asteroid
 ========
 
 Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions! Quickly bind JQuery events and much more…
+In other words Asteroid gives the ability to lazy load your partials either on load or bound to events like 'click' or 'mouseenter'.
 
 ## Requirements
 1. Yii 1.8 or above
@@ -142,7 +143,7 @@ public function actionTestUI()
 			->renderMethod('render')
 			->replace('#myDiv3', '_p3GridView',  function() { 
 				$sample = new Sample(); 
-				if(isset($_GET['Sample'])) $sample>attributes = $_GET['Sample']; 
+				if(isset($_GET['Sample'])) $sample->attributes = $_GET['Sample']; 
 				return array('model' => $sample); 
 			  })
 	->orbit();
