@@ -37,6 +37,7 @@ Asteroid.prototype.updateUI = function(myConfig)
 
 Asteroid.prototype.createURL = function(id) {
 	url = document.URL;
+	if(url.indexOf('#') > -1) url = url.split('#')[0];
 	if(url.indexOf('?') > -1) return url + '&AsteroidActionID=' + id;
 	return url + '?' + 'AsteroidActionID=' + id;
 };
