@@ -56,7 +56,7 @@
 		public function renderMethod($type='renderPartial', $viewTemplate=null)
 		{
 			if(!is_null($viewTemplate)) $this->$_AsteroidCometRenderTemplate = $viewTemplate;
-			$this->_AsteroidCometRender = 'render';
+			$this->_AsteroidCometRender = $type;
 			return $this;
 		}
 		
