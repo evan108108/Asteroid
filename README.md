@@ -181,6 +181,25 @@ public function actionTestUI()
 }
 ```
 
+
+###<a name="_example2"/>Exmaple 4:</a> Using sendVars()  
+Lets say we would like to keep track of the number of clicks on a particular DOM element and update the view with the total. Every time a user clicks '#clickMe' we will replace the content of '#myDiv1' with the incremented count.
+
+```php
+	->Asteroid('counterExample')
+		->onEvent('click', '#clickMe')
+		->sendVars(function($vars) {
+			if(empty($vars)) $vars = array('count'=>0);
+			$vars['count']++;
+			return $vars;
+		})
+		->replace('#myDiv1', '_myPlace3', function($vars) {
+			return array('var1'=>'Cool I Clicked that', 'var2'=> . $vars['count'] . 'X');
+		})
+	->orbit
+```
+
+
 ##API
 ###Public Methods
 | Method  | Description  |
@@ -192,6 +211,7 @@ public function actionTestUI()
 | [prepend](#methodPrepend)  | Same as `append` but prepends to DOM element content.  |
 | [replace](#methodReplace)  | Same as `append` but replaces DOM element content.  |
 | [execJS](#methodExecJS)  | Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. `execJS('alert("Yeah!");')`  |
+| [sendVars](#methodSendVars)  | Attach variables to your request. |
 | [orbit](#methodOrbit)  | Renders all JS and CSS dependencies. You must Call `orbit()` as the very last step after all comets have been initialized with Asteroid('id');  |
 
 ###Method Details
@@ -280,6 +300,18 @@ public function actionTestUI()
 |  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $js  | String  | Valid Javascript |
+
+
+####<a name="methodSendVars"/> sendVars</a>
+|Method Info|
+|---------------|
+| ```public object sendVars(Closure $myVars)``` |
+|Tells your Asteroid to attach variables returned by the closure $myVars to a request|
+
+|  Param |  Type | Description |
+|---------------|----------------|----------------|
+| $myVars | Closure | Closure must return an associative array.|
+
 
 ####<a name="methodOrbit"/> orbit</a>
 |Method Info|

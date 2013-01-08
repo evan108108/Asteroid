@@ -13,6 +13,8 @@
 
 		public $_listener; //Stores listener for comet;
 
+		public $_asteroidVars;
+
 		//Initilizes Asteroid and creates a comet for the $id passed
 		//$id should be unique unless you intend to overwrite an existing comet.
 		//Note: A `comet` is an object that contains a unique async event.
@@ -20,6 +22,9 @@
 		{
 			if(!isset($this->_AsteroidActionID) && isset($_GET['AsteroidActionID']))
 				$this->_AsteroidActionID = $_GET['AsteroidActionID'];
+
+			if(isset($_GET['asteroid_vars']))
+				$this->_asteroidVars = CJSON::decode($_GET['asteroid_vars']);
 
 			$this->_AsteroidID = $id;
 			$this->_listener = array('event'=>'load', 'selector'=>'body'); //re sets the default listener to body.onLoad
@@ -67,12 +72,26 @@
 			$this->_listener = array('event'=>$event, 'selector'=>$selector);
 			return $this;
 		}
+		
+		//Set vars to be attached and sent along with a request
+		/*Example: sendVars(function($vars) {
+				if(empty($vars)) $vars = array('count'=>0);
+				$vars['count']++;
+				return $vars;
+			}
+		 */
+		public function sendVars(Closure $myVars)
+		{
+			$this->_asteroidVars = $myVars($this->_asteroidVars);
+			header("x-asteroid-vars: " . CJSON::encode($this->_asteroidVars));
+			return $this;
+		}
 
 		//Tells JS to append the content to the dom element :$selector 
 		//using the Yii view: $view
 		//with the data: $data. $data must be a closure that returns an associative array.
 		//String $elment, String $view, Closure $data
-		public function append($selector, $view, closure $data)
+		public function append($selector, $view, Closure $data)
 		{
 			$this->setComet($this->_AsteroidID, array('renderType'=>'append', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
@@ -82,7 +101,7 @@
 		//using the Yii view: $view
 		//with the data: $data. $data must be a closure the returns an array.
 		//String $elment, String $view, Closure $data
-		public function prepend($selector, $view, closure $data)
+		public function prepend($selector, $view, Closure $data)
 		{
 			$this->setComet($this->_AsteroidID, array('renderType'=>'prepend', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
@@ -92,7 +111,7 @@
 		//using the Yii view: $view
 		//with the data: $data. $data must be a closure the returns an array.
 		//String $elment, String $view, Closure $data
-		public function replace($selector, $view, closure $data)
+		public function replace($selector, $view, Closure $data)
 		{
 			$this->setComet($this->_AsteroidID, array('renderType'=>'replace', 'element'=>$selector, 'template'=>$view, 'data'=>$data));
 			return $this;
@@ -135,8 +154,14 @@
 			{
 				$this->owner->layout = $this->_AsteroidCometRenderTemplate;
 			}
-			
-			$this->owner->{$this->_AsteroidCometRender}($comet->template, $data());
+
+			$fct = new ReflectionFunction($data);
+			if($fct->getNumberOfRequiredParameters() > 0)
+				$params = $data($this->_asteroidVars);
+			else
+				$params = $data();
+
+			$this->owner->{$this->_AsteroidCometRender}($comet->template, $params);
 			Yii::app()->end();
 		}
 
@@ -157,3 +182,4 @@
     }
 	
 	}
+

@@ -7,6 +7,8 @@ Asteroid.prototype.run = function() {
 	for(i=0;i<this.config.length;i++)
 	{
 		var myConfig = this.config[i];
+		myConfig.index = i;
+		myConfig.vars = "";
 		if(myConfig.listen.event == 'load' && myConfig.listen.selector == 'body')
 			this.updateUI(myConfig);
 		else
@@ -16,10 +18,12 @@ Asteroid.prototype.run = function() {
 
 Asteroid.prototype.updateUI = function(myConfig)
 {	
-	var url =  this.createURL(myConfig.id);
+	var url =  this.createURL(myConfig);
 	var element = myConfig.element;
+	var config = this.config;
 	$(element).addClass('asteroidLoader');
-	$.get(url, function(data) {;
+	var xhr = $.get(url, function(data) {;
+			config[myConfig.index].vars = xhr.getResponseHeader('x-asteroid-vars');
 			switch(myConfig.renderType)
 			{
 				case 'append':
@@ -35,11 +39,12 @@ Asteroid.prototype.updateUI = function(myConfig)
 	});
 }
 
-Asteroid.prototype.createURL = function(id) {
+Asteroid.prototype.createURL = function(myConfig) {
 	url = document.URL;
 	if(url.indexOf('#') > -1) url = url.split('#')[0];
-	if(url.indexOf('?') > -1) return url + '&AsteroidActionID=' + id;
-	return url + '?' + 'AsteroidActionID=' + id;
+	if(url.indexOf('?') > -1) url += '&';
+	else url += '?';
+	return url + 'AsteroidActionID=' + myConfig.id + '&' + 'asteroid_vars=' + this.config[myConfig.index].vars;
 };
 
 Asteroid.prototype.attachListener = function(myConfig) {
@@ -54,7 +59,9 @@ Asteroid.prototype.attachListener = function(myConfig) {
 $(document).ready(function() {
 	if(asteroidConfig != undefined)
 		var myAsteroid = new Asteroid(asteroidConfig);
+		window.myAsteroid = myAsteroid;
 });
+
 
 
 
