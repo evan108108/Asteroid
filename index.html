@@ -41,7 +41,8 @@
       <section>
         <h1>Asteroid</h1>
 
-<p>Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions! Quickly bind JQuery events and much more…</p>
+<p>Yii Extension: Quickly Add Dynamic Content Without Writing JS Or Additional Actions! Quickly bind JQuery events and much more…
+In other words Asteroid gives the ability to lazy load your partials either on load or bound to events like 'click' or 'mouseenter'.</p>
 
 <h2>Requirements</h2>
 
@@ -190,7 +191,7 @@
             <span class="o">-&gt;</span><span class="na">renderMethod</span><span class="p">(</span><span class="s1">'render'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv3'</span><span class="p">,</span> <span class="s1">'_p3GridView'</span><span class="p">,</span>  <span class="k">function</span><span class="p">()</span> <span class="p">{</span> 
                 <span class="nv">$sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sample</span><span class="p">();</span> 
-                <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">]))</span> <span class="nv">$sample</span><span class="o">&gt;</span><span class="nx">attributes</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">];</span> 
+                <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">]))</span> <span class="nv">$sample</span><span class="o">-&gt;</span><span class="na">attributes</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">];</span> 
                 <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="nv">$sample</span><span class="p">);</span> 
               <span class="p">})</span>
     <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
@@ -226,6 +227,24 @@
 
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
 <span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="_example2"></a>Exmaple 4: Using sendVars()</h3>
+
+<p>Lets say we would like to keep track of the number of clicks on a particular DOM element and update the view with the total. Every time a user clicks '#clickMe' we will replace the content of '#myDiv1' with the incremented count.</p>
+
+<div class="highlight"><pre>    <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'counterExample'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">onEvent</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'#clickMe'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">sendVars</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$vars</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$vars</span><span class="p">))</span> <span class="nv">$vars</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'count'</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">);</span>
+            <span class="nv">$vars</span><span class="p">[</span><span class="s1">'count'</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nv">$vars</span><span class="p">;</span>
+        <span class="p">})</span>
+        <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_myPlace3'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$vars</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Cool I Clicked that'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span> <span class="o">.</span> <span class="nv">$vars</span><span class="p">[</span><span class="s1">'count'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'X'</span><span class="p">);</span>
+        <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span>
 </pre></div>
 
 <h2>API</h2>
@@ -265,6 +284,10 @@
 <td><a href="#methodExecJS">execJS</a></td>
 <td>Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. <code>execJS('alert("Yeah!");')</code>
 </td>
+</tr>
+<tr>
+<td><a href="#methodSendVars">sendVars</a></td>
+<td>Attach variables to your request.</td>
 </tr>
 <tr>
 <td><a href="#methodOrbit">orbit</a></td>
@@ -482,6 +505,30 @@
 <td>Valid Javascript</td>
 </tr>
 </table><h4>
+<a name="methodSendVars"></a> sendVars</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object sendVars(Closure $myVars)</code></td>
+</tr>
+<tr>
+<td>Tells your Asteroid to attach variables returned by the closure $myVars to a request</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$myVars</td>
+<td>Closure</td>
+<td>Closure must return an associative array.</td>
+</tr>
+</table><h4>
 <a name="methodOrbit"></a> orbit</h4>
 
 <table>
@@ -502,20 +549,6 @@
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    <script type="text/javascript">
-
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-83119-2']);
-			_gaq.push(['_setDomainName', 'github.com']);
-			_gaq.push(['_setAllowLinker', true]);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-
-		</script>
+    
   </body>
 </html>
