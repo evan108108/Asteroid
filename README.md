@@ -256,7 +256,7 @@ public function actionTestUI()
 		'application.asteroidBelts.UiHelperAB', 
 	 	array(
 			array('a1a3', array($myvar)),
-			array('grid, array()),
+			array('grid', array()),
 		)
 	)
 	->Asteroid('someID')->...
