@@ -144,7 +144,7 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 
 <div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
     <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
 
@@ -156,9 +156,9 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 
 <div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
-         <span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'#myDive2'</span><span class="p">,</span> <span class="s1">'_p2'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var3'</span><span class="o">=&gt;</span><span class="s1">'Im Here!'</span><span class="p">,</span> <span class="s1">'var4'</span><span class="o">=&gt;</span><span class="s1">'You know it!'</span><span class="p">);</span> <span class="p">})</span>
     <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
 
@@ -170,9 +170,9 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 
 <div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="s1">'Thats right!'</span><span class="p">);</span> <span class="p">})</span>
-         <span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="s1">'#myDive2'</span><span class="p">,</span> <span class="s1">'_p2'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var3'</span><span class="o">=&gt;</span><span class="s1">'Im Here!'</span><span class="p">,</span> <span class="s1">'var4'</span><span class="o">=&gt;</span><span class="s1">'You know it!'</span><span class="p">);</span> <span class="p">})</span>
     <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>
 
@@ -187,7 +187,7 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 
 <div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">renderMethod</span><span class="p">(</span><span class="s1">'render'</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv3'</span><span class="p">,</span> <span class="s1">'_p3GridView'</span><span class="p">,</span>  <span class="k">function</span><span class="p">()</span> <span class="p">{</span> 
                 <span class="nv">$sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sample</span><span class="p">();</span> 
@@ -230,7 +230,7 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 </pre></div>
 
 <h3>
-<a name="_example2"></a>Exmaple 4: Using sendVars()</h3>
+<a name="_example4"></a>Exmaple 4: Using sendVars()</h3>
 
 <p>Lets say we would like to keep track of the number of clicks on a particular DOM element and update the view with the total. Every time a user clicks '#clickMe' we will replace the content of '#myDiv1' with the incremented count.</p>
 
@@ -245,6 +245,71 @@ In other words Asteroid gives the ability to lazy load your partials either on l
             <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Cool I Clicked that'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span> <span class="o">.</span> <span class="nv">$vars</span><span class="p">[</span><span class="s1">'count'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'X'</span><span class="p">);</span>
         <span class="p">})</span>
     <span class="o">-&gt;</span><span class="na">orbit</span>
+</pre></div>
+
+<h3>
+<a name="_example5"></a>Exmaple 5: Using useBelt()</h3>
+
+<p>The 'useBelt' method provides a way to keep things DRY, allowing you to aply groups of Asteroid actions you have defined.  </p>
+
+<p>To use 'useBelt' you will need to create at least one instance of EAsteroidBelt. Lets start there and create a folder in 'protected'
+called 'asteroidBelts' ('webapp/protected/asteroidBelts'). We will use this folder to store our Belts. Now we will create a new class called 'UiHelperAB' and save it to a file called 'UiHelperAB.php' in the 'asteroidBelts' directory we just created. Your class will look something like this:</p>
+
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">UiHelperAB</span> <span class="k">extends</span> <span class="nx">EAsteroidBelt</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">a1a2</span><span class="p">(</span><span class="nv">$myvar</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv1'</span><span class="p">,</span> <span class="s1">'_p1'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="nv">$myvar</span> <span class="p">{</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var1'</span><span class="o">=&gt;</span><span class="s1">'Yeah!'</span><span class="p">,</span> <span class="s1">'var2'</span><span class="o">=&gt;</span><span class="nv">$myvar</span><span class="p">);</span> <span class="p">})</span>
+         <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'#myDive2'</span><span class="p">,</span> <span class="s1">'_p2'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'var3'</span><span class="o">=&gt;</span><span class="s1">'Im Here!'</span><span class="p">,</span> <span class="s1">'var4'</span><span class="o">=&gt;</span><span class="s1">'You know it!'</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">grid</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'grid'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">renderMethod</span><span class="p">(</span><span class="s1">'render'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">'#myDiv3'</span><span class="p">,</span> <span class="s1">'_p3GridView'</span><span class="p">,</span>  <span class="k">function</span><span class="p">()</span> <span class="p">{</span> 
+                <span class="nv">$sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sample</span><span class="p">();</span> 
+                <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">]))</span> <span class="nv">$sample</span><span class="o">-&gt;</span><span class="na">attributes</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Sample'</span><span class="p">];</span> 
+                <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="nv">$sample</span><span class="p">);</span> 
+            <span class="p">})</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+
+<p>Cool we have an Asteroid Belt, now lets use it in our controller. Lets say we want to use a1a2:</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$myvar</span> <span class="o">=</span> <span class="s2">"I did this with an Asteroid Belt!"</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'UIHelper'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">useBelt</span><span class="p">(</span>
+        <span class="s1">'application.asteroidBelts.UiHelperAB'</span><span class="p">,</span> <span class="s1">'a1a2'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$myvar</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'someID'</span><span class="p">)</span><span class="o">-&gt;...</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>      
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Great, but what if we want to use 'a1a2' and 'grid' in our controller action. We could just repeat the above line again and swap out the method name but there is another way. Lets take a look:  </p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">actionTestUI</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$myvar</span> <span class="o">=</span> <span class="s2">"I did this with an Asteroid Belt!"</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'UIHelper'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">useBelt</span><span class="p">(</span>
+        <span class="s1">'application.asteroidBelts.UiHelperAB'</span><span class="p">,</span> 
+        <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">'a1a2'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$myvar</span><span class="p">)),</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">'grid'</span><span class="p">,</span> <span class="k">array</span><span class="p">()),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">Asteroid</span><span class="p">(</span><span class="s1">'someID'</span><span class="p">)</span><span class="o">-&gt;...</span>
+    <span class="o">-&gt;</span><span class="na">orbit</span><span class="p">();</span>  
+    <span class="o">...</span>
+<span class="p">}</span>
 </pre></div>
 
 <h2>API</h2>
@@ -288,6 +353,10 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 <tr>
 <td><a href="#methodSendVars">sendVars</a></td>
 <td>Attach variables to your request.</td>
+</tr>
+<tr>
+<td><a href="#methodUseBelt">useBelt</a></td>
+<td>Attach groups of predefined Asteroid Actions</td>
 </tr>
 <tr>
 <td><a href="#methodOrbit">orbit</a></td>
@@ -527,6 +596,40 @@ In other words Asteroid gives the ability to lazy load your partials either on l
 <td>$myVars</td>
 <td>Closure</td>
 <td>Closure must return an associative array.</td>
+</tr>
+</table><h4>
+<a name="methodUseBelt"></a> useBelt</h4>
+
+<table>
+<tr>
+<th>Method Info</th>
+</tr>
+<tr>
+<td><code>public object useBelt(String $beltPath, Mixed $methods,  Array $method_vars = array())</code></td>
+</tr>
+<tr>
+<td>Stay DRY! Attach groups of predefined Asteroid Actions</td>
+</tr>
+</table><table>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>$beltPath</td>
+<td>String</td>
+<td>Path to belt class</td>
+</tr>
+<tr>
+<td>$methods</td>
+<td>Mixed</td>
+<td>Contains the method(s) to call in your belt. Can also include the method_vars when passing multiple methods ( see <a href="#_example5">Example5</a> )</td>
+</tr>
+<tr>
+<td>$method_vars</td>
+<td>Array</td>
+<td>Vars to be sent to $method (optional)</td>
 </tr>
 </table><h4>
 <a name="methodOrbit"></a> orbit</h4>
