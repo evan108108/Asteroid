@@ -255,7 +255,7 @@ public function actionTestUI()
 	$this->Asteroid('UIHelper')->useBelt(
 		'application.asteroidBelts.UiHelperAB', 
 	 	array(
-			array('a1a3', array($myvar)),
+			array('a1a2', array($myvar)),
 			array('grid', array()),
 		)
 	)
