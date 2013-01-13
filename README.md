@@ -238,7 +238,7 @@ public function actionTestUI()
 {
 	$myvar = "I did this with an Asteroid Belt!";
 	$this->Asteroid('UIHelper')->useBelt(
-		'application.asteroidBelts.UiHelperAB', 'a1a3', array($myvar)
+		'application.asteroidBelts.UiHelperAB', 'a1a2', array($myvar)
 	)
 	->Asteroid('someID')->...
 	->orbit();		
