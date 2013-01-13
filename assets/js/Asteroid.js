@@ -23,7 +23,7 @@ Asteroid.prototype.updateUI = function(myConfig)
 	var config = this.config;
 	$(element).addClass('asteroidLoader');
 	var xhr = $.get(url, function(data) {;
-			config[myConfig.index].vars = xhr.getResponseHeader('x-asteroid-vars');
+			config[myConfig.index].vars = xhr.getResponseHeader('X-ASTEROID-VARS');
 			switch(myConfig.renderType)
 			{
 				case 'append':
@@ -61,7 +61,6 @@ $(document).ready(function() {
 		var myAsteroid = new Asteroid(asteroidConfig);
 		window.myAsteroid = myAsteroid;
 });
-
 
 
 

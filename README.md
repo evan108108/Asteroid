@@ -96,7 +96,7 @@ Lets say we want to dynamically load the content of the partial view _p1.php int
 ```php
 public function actionTestUI()
 {
-	$this->asteroid('a1')
+	$this->Asteroid('a1')
 			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
 	->orbit();
 	
@@ -109,9 +109,9 @@ Now lets say we have the same scenario but we would also like to append some con
 ```php
 public function actionTestUI()
 {
-	$this->asteroid('a1')
+	$this->Asteroid('a1')
 			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
-		 ->asteroid('a2')
+		 ->Asteroid('a2')
 		 	->append('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
 	->orbit();
 	
@@ -123,9 +123,9 @@ We could also have chosen to prepend
 ```php
 public function actionTestUI()
 {
-	$this->asteroid('a1')
+	$this->Asteroid('a1')
 			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
-		 ->asteroid('a2')
+		 ->Asteroid('a2')
 		 	->prepend('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
 	->orbit();
 	
@@ -139,7 +139,7 @@ When your partial contains a widget like CGridView that registers scripts and or
 ```php
 public function actionTestUI()
 {
-	$this->asteroid('a1')
+	$this->Asteroid('a1')
 			->renderMethod('render')
 			->replace('#myDiv3', '_p3GridView',  function() { 
 				$sample = new Sample(); 
@@ -182,7 +182,7 @@ public function actionTestUI()
 ```
 
 
-###<a name="_example2"/>Exmaple 4:</a> Using sendVars()  
+###<a name="_example4"/>Exmaple 4:</a> Using sendVars()  
 Lets say we would like to keep track of the number of clicks on a particular DOM element and update the view with the total. Every time a user clicks '#clickMe' we will replace the content of '#myDiv1' with the incremented count.
 
 ```php
@@ -199,6 +199,72 @@ Lets say we would like to keep track of the number of clicks on a particular DOM
 	->orbit
 ```
 
+###<a name="_example5"/>Exmaple 5:</a> Using useBelt() 
+The 'useBelt' method provides a way to keep things DRY, allowing you to aply groups of Asteroid actions you have defined.  
+
+To use 'useBelt' you will need to create at least one instance of EAsteroidBelt. Lets start there and create a folder in 'protected'
+called 'asteroidBelts' ('webapp/protected/asteroidBelts'). We will use this folder to store our Belts. Now we will create a new class called 'UiHelperAB' and save it to a file called 'UiHelperAB.php' in the 'asteroidBelts' directory we just created. Your class will look something like this:
+
+```php
+class UiHelperAB extends EAsteroidBelt
+{
+
+	public function a1a2($myvar)
+	{
+		$this->Asteroid('a1')
+        	->replace('#myDiv1', '_p1', function() use $myvar { return array('var1'=>'Yeah!', 'var2'=>$myvar); })
+         ->Asteroid('a2')
+            ->append('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
+	}
+
+	public function grid()
+	{
+		$this->Asteroid('grid')
+            ->renderMethod('render')
+            ->replace('#myDiv3', '_p3GridView',  function() { 
+				$sample = new Sample(); 
+                if(isset($_GET['Sample'])) $sample->attributes = $_GET['Sample']; 
+                return array('model' => $sample); 
+			})
+	}
+
+}
+```
+
+Cool we have an Asteroid Belt, now lets use it in our controller. Lets say we want to use a1a2:
+
+```php
+public function actionTestUI()
+{
+	$myvar = "I did this with an Asteroid Belt!";
+	$this->Asteroid('UIHelper')->useBelt(
+		'application.asteroidBelts.UiHelperAB', 'a1a3', array($myvar)
+	)
+	->Asteroid('someID')->...
+	->orbit();		
+	...
+}
+```
+
+Great, but what if we want to use 'a1a2' and 'grid' in our controller action. We could just repeat the above line again and swap out the method name but there is another way. Lets take a look:  
+
+```php
+public function actionTestUI()
+{
+	$myvar = "I did this with an Asteroid Belt!";
+	$this->Asteroid('UIHelper')->useBelt(
+		'application.asteroidBelts.UiHelperAB', 
+	 	array(
+			array('a1a3', array($myvar)),
+			array('grid, array()),
+		)
+	)
+	->Asteroid('someID')->...
+	->orbit();	
+	...
+}
+```
+
 
 ##API
 ###Public Methods
@@ -212,6 +278,7 @@ Lets say we would like to keep track of the number of clicks on a particular DOM
 | [replace](#methodReplace)  | Same as `append` but replaces DOM element content.  |
 | [execJS](#methodExecJS)  | Call this method to add arbitrary JavaScript. Takes String $js of valid JavaScript. `execJS('alert("Yeah!");')`  |
 | [sendVars](#methodSendVars)  | Attach variables to your request. |
+| [useBelt](#methodUseBelt)  | Attach groups of predefined Asteroid Actions |
 | [orbit](#methodOrbit)  | Renders all JS and CSS dependencies. You must Call `orbit()` as the very last step after all comets have been initialized with Asteroid('id');  |
 
 ###Method Details
@@ -311,6 +378,19 @@ Lets say we would like to keep track of the number of clicks on a particular DOM
 |  Param |  Type | Description |
 |---------------|----------------|----------------|
 | $myVars | Closure | Closure must return an associative array.|
+
+
+####<a name="methodUseBelt"/> useBelt</a>
+|Method Info|
+|---------------|
+| ```public object useBelt(String $beltPath, Mixed $methods,  Array $method_vars = array())``` |
+|Stay DRY! Attach groups of predefined Asteroid Actions|
+
+|  Param |  Type | Description |
+|---------------|----------------|----------------|
+| $beltPath | String | Path to belt class |
+| $methods | Mixed | Contains the method(s) to call in your belt. Can also include the method_vars when passing multiple methods ( see [Example5](#_example5) )|
+| $method_vars | Array | Vars to be sent to $method (optional) |
 
 
 ####<a name="methodOrbit"/> orbit</a>

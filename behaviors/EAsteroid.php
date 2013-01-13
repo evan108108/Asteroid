@@ -15,6 +15,11 @@
 
 		public $_asteroidVars;
 
+		function __construct()
+		{
+			Yii::import('ext.Asteroid.behaviors.EAsteroidBelt');
+		}
+
 		//Initilizes Asteroid and creates a comet for the $id passed
 		//$id should be unique unless you intend to overwrite an existing comet.
 		//Note: A `comet` is an object that contains a unique async event.
@@ -54,6 +59,24 @@
 			}
 		}
 		
+		/* Keep things DRY by defining Asteroid Belts
+		 * Example: $this->Asteroid('UIHelper')->useBelt('application.asteroidBelts.UiHelperAB', array(
+		 *		array('part1', array($myvar)),
+		 *		array('part2', array()),
+		 *  ))
+		 *  OR
+		 *  $this->Asteroid('UIHelper')->useBelt('application.asteroidBelts.UiHelperAB', 'part1', array($myvar))
+		 */
+		public function useBelt($beltPath, $methods, $method_vars = array())
+		{
+			$belt_class = Yii::import($beltPath);
+			if(!is_array($methods)) $methods = array(array($methods, $method_vars));
+			foreach($methods as $method)
+				call_user_func_array(array(new $belt_class(&$this), $method[0]), $method[1]);
+
+			return $this;
+		}
+		
 		//Setter for _AsteroidCometRender the sets the Yii render type for your comet
 		//renderPartial is the default. Generaly you need to use pass 'render' if you are using Yii widgets like Grid View.
 		//Optional: You may pass a view template path (only applies to a render method type of `render`). By default this path is `ext.Asteroid.views.clean`
@@ -83,7 +106,7 @@
 		public function sendVars(Closure $myVars)
 		{
 			$this->_asteroidVars = $myVars($this->_asteroidVars);
-			header("x-asteroid-vars: " . CJSON::encode($this->_asteroidVars));
+			header("X-ASTEROID-VARS: " . CJSON::encode($this->_asteroidVars));
 			return $this;
 		}
 
@@ -182,4 +205,3 @@
     }
 	
 	}
-
