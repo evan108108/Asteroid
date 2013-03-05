@@ -100,7 +100,7 @@ public function actionTestUI()
 			->replace('#myDiv1', '_p1', function(){ return array('var1'=>'Yeah!', 'var2'=>'Thats right!'); })
 	->orbit();
 	
-	$this->render('test');
+	this->render('index');
 }
 ```
 
