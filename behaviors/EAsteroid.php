@@ -72,7 +72,7 @@
 			$belt_class = Yii::import($beltPath);
 			if(!is_array($methods)) $methods = array(array($methods, $method_vars));
 			foreach($methods as $method)
-				call_user_func_array(array(new $belt_class(&$this), $method[0]), $method[1]);
+				call_user_func_array(array(new $belt_class($this), $method[0]), $method[1]);
 
 			return $this;
 		}
