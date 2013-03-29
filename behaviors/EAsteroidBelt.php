@@ -3,7 +3,7 @@ class EAsteroidBelt
 {
 	protected $_Asteroid;
 
-	function __construct(EAsteroid $asteroid)
+	function __construct(EAsteroid &$asteroid)
 	{
 		$this->_Asteroid = $asteroid;
 	}
