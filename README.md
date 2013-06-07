@@ -212,7 +212,7 @@ class UiHelperAB extends EAsteroidBelt
 	public function a1a2($myvar)
 	{
 		$this->Asteroid('a1')
-        	->replace('#myDiv1', '_p1', function() use $myvar { return array('var1'=>'Yeah!', 'var2'=>$myvar); })
+        	->replace('#myDiv1', '_p1', function() use ($myvar) { return array('var1'=>'Yeah!', 'var2'=>$myvar); })
          ->Asteroid('a2')
             ->append('#myDive2', '_p2', function(){ return array('var3'=>'Im Here!', 'var4'=>'You know it!'); })
 	}
